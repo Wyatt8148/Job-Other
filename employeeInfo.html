@@ -1,0 +1,324 @@
+<template>
+    <lightning-card title="Vehicle Registration">
+    <p style="height:4px; width:100%; border-width:0; color:rgb(128, 31, 31); background-color:rgb(128, 31, 31)"></p>
+        <lightning-formatted-rich-text value={secOne}></lightning-formatted-rich-text>
+        <p style="height:4px; width:100%; border-width:0; color:rgb(128, 31, 31); background-color:rgb(128, 31, 31)"></p>
+        <div class="slds-p-bottom_large slds-p-left_large" style="width:300px"></div>
+        <lightning-record-edit-form object-api-name="Vehicle_Registration__c">
+            <lightning-messages></lightning-messages>
+            <lightning-layout>
+                <lightning-layout-item>
+                    <div class="c-container">
+                            <div style="width:450px">
+                                <lightning-input 
+                                    name="employeeName"
+                                    label="Employee Name"
+                                    value={employeeNameValue}
+                                    message-when-value-missing="Employee Name is required"
+                                    message-when-pattern-mismatch="Employee Name is invalid"
+                                    onchange={handleOnChangeName}
+                                    disabled={disableFields}
+                                    pattern="[-a-zA-Z\s\\-\\' ]+"
+                                    required
+                                ></lightning-input>
+                                <lightning-input
+                                    name="employeeNumber"
+                                    label="Employee Number"
+                                    value={employeeNumberValue}
+                                    message-when-value-missing="Employee Number is required"
+                                    message-when-pattern-mismatch="Employee Number is invalid"
+                                    minlength="8" 
+                                    message-when-too-short="Employee Number Number is invalid"
+                                    maxlength="8" 
+                                    message-when-too-long="Employee Number is invalid" 
+                                    onchange={handleOnChangeName}
+                                    disabled={disableFields}
+                                    pattern="^[0-9]*$"
+                                    required
+                                ></lightning-input>
+                                <lightning-input
+                                    name="employeePhone"
+                                    label="Employee Phone Number"
+                                    value={employeePhoneValue}
+                                    message-when-value-missing="Employee Phone Number is required"
+                                    minlength="10" 
+                                    message-when-too-short="Employee Phone Number is invalid"
+                                    maxlength="12" 
+                                    message-when-too-long="Employee Phone Number is invalid" 
+                                    onchange={handleOnChangeName}
+                                    disabled={disableFields}
+                                    required
+                                ></lightning-input>
+                                <lightning-input
+                                    name="employeeEmail"
+                                    label="Employee Email"
+                                    value={employeeEmailValue}
+                                    message-when-value-missing="Employee Email is required"
+                                    message-when-pattern-mismatch="Employee Email is invalid"
+                                    onchange={handleOnChangeName}
+                                    disabled={disableFields}
+                                    pattern="^([0-9a-zA-Z]+[-._+&amp;])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$"
+                                    required
+                                ></lightning-input>
+                            </div>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+            <p style="height:4px; width:100%; border-width:0; color:rgb(128, 31, 31); background-color:rgb(128, 31, 31)"></p>
+            <lightning-formatted-rich-text value={secTwo}></lightning-formatted-rich-text>
+            <p style="height:4px; width:100%; border-width:0; color:rgb(128, 31, 31); background-color:rgb(128, 31, 31)"></p>
+            <lightning-input 
+                name="yearOne" 
+                label="Year"
+                style="width:450px"
+                message-when-value-missing="Year is required"
+                message-when-pattern-mismatch="Year is invalid"
+                minlength="4" 
+                message-when-too-short="Year is invalid"
+                maxlength="4" 
+                message-when-too-long="Year is invalid"
+                pattern="^[0-9]*$"
+                onchange={handleOnChangeName}
+                value={yearOneValue}
+                required
+            ></lightning-input>
+            <lightning-input-field
+                style="width:450px" 
+                field-name="Make_1__c"
+                onchange={handleMakeOneChange}
+                value={makeOneValue}
+                placeholder="--None--"
+                required
+                ></lightning-input-field>
+                <div style="width:450px">
+                    <lightning-input 
+                        name="modelOne"
+                        label="Model"
+                        message-when-value-missing="Model is required"
+                        message-when-pattern-mismatch="Model is invalid"
+                        pattern="^[0-9a-zA-Z]*$"
+                        onchange={handleOnChangeName}
+                        value={modelOneValue}
+                        required
+                    ></lightning-input>
+                    <lightning-input 
+                        name="colorOne"
+                        label="Color"
+                        message-when-value-missing="Color is required"
+                        message-when-pattern-mismatch="Color is invalid"
+                        pattern="^[a-zA-Z\s ]*$"
+                        onchange={handleOnChangeName}
+                        value={colorOneValue}
+                        required
+                    ></lightning-input>
+                    <lightning-input 
+                        name="lpOne"
+                        label="License Plate Number"
+                        message-when-value-missing="License Plate Number is required"
+                        message-when-pattern-mismatch="License Plate Number is invalid"
+                        minlength="7" 
+                        message-when-too-short="License Plate Number is invalid"
+                        maxlength="7" 
+                        message-when-too-long="License Plate Number is invalid"
+                        pattern="^[0-9a-zA-Z]*$"
+                        onchange={handleOnChangeName}
+                        value={lpOneValue}
+                        required
+                    ></lightning-input>
+                </div>
+            <div class="slds-m-around_medium">
+                <lightning-input 
+                    type="checkbox" 
+                    label="Vehicle 2" 
+                    onchange={handleVehicleTwo}
+                ></lightning-input>
+                <p style="height:1px; width:100%; border-width:0; color:rgb(0, 0, 0); background-color:rgb(0, 0, 0)"></p>
+                <template if:true={areDetailsVisible}>
+                    <div class="slds-m-vertical_medium">
+                    <lightning-input 
+                        name="yearTwo"
+                        style="width:450px"
+                        label="Year"
+                        message-when-value-missing="Year is required"
+                        message-when-pattern-mismatch="Year is invalid"
+                        minlength="4" 
+                        message-when-too-short="Year is invalid"
+                        maxlength="4" 
+                        message-when-too-long="Year is invalid"
+                        onchange={handleOnChangeName_2}
+                        value={yearTwoValue}
+                        pattern="^[0-9]*$"
+                    ></lightning-input>
+                        <lightning-input-field
+                            style="width:450px" 
+                            field-name="Make_2__c"
+                            onchange={handleMakeTwoChange}
+                            value={makeTwoValue}
+                            placeholder="--None--"
+                        ></lightning-input-field>
+                        <div style="width:450px">
+                            <lightning-input
+                                name="modelTwo"
+                                label="Model"
+                                message-when-value-missing="Model is required"
+                                message-when-pattern-mismatch="Model is invalid"
+                                onchange={handleOnChangeName_2}
+                                value={modelTwoValue}
+                                pattern="^[0-9a-zA-Z]*$"
+                                ></lightning-input>
+                            <lightning-input 
+                                name="colorTwo"
+                                label="Color"
+                                message-when-value-missing="Color is required"
+                                message-when-pattern-mismatch="Color is invalid"
+                                onchange={handleOnChangeName_2}
+                                value={colorTwoValue}
+                                pattern="^[a-zA-Z\s ]*$"
+                        ></lightning-input>
+                            <lightning-input 
+                                name="lpTwo"
+                                label="License Plate Number"
+                                message-when-value-missing="License Plate Number is required"
+                                message-when-pattern-mismatch="License Plate Number is invalid"
+                                minlength="7" 
+                                message-when-too-short="License Plate Number is invalid"
+                                maxlength="7" 
+                                message-when-too-long="License Plate Number is invalid"
+                                onchange={handleOnChangeName_2}
+                                value={lpTwoValue}
+                                pattern="^[0-9a-zA-Z]*$"
+                            ></lightning-input>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        <div class="slds-m-around_medium">
+            <lightning-input 
+                type="checkbox" 
+                label="Vehicle 3" 
+                onchange={handleVehicleThree}
+            ></lightning-input>
+            <p style="height:1px; width:100%; border-width:0; color:rgb(0, 0, 0); background-color:rgb(0, 0, 0)"></p>
+                <template if:true={areDetailsVisible_2}>
+                    <div class="slds-m-vertical_medium">
+                    <lightning-input
+                        name="yearThree"
+                        style="width:450px"
+                        label="Year"
+                        message-when-value-missing="Year is required"
+                        message-when-pattern-mismatch="Year is invalid"
+                        minlength="4" 
+                        message-when-too-short="Year is invalid"
+                        maxlength="4" 
+                        message-when-too-long="Year is invalid"
+                        value={yearThreeValue}
+                        onchange={handleOnChangeName_3}
+                        pattern="^[0-9]*$"
+                    ></lightning-input>
+                        <lightning-input-field
+                            style="width:450px" 
+                            field-name="Make_3__c"
+                            onchange={handleMakeThreeChange}
+                            value={makeThreeValue}
+                            placeholder="--None--"
+                        ></lightning-input-field>
+                         <div style="width:450px">
+                            <lightning-input
+                                name="modelThree"
+                                label="Model"
+                                message-when-value-missing="Model is required"
+                                message-when-pattern-mismatch="Model is invalid"
+                                onchange={handleOnChangeName_3}
+                                value={modelThreeValue}
+                                pattern="^[0-9a-zA-Z]*$"
+                            ></lightning-input>
+                            <lightning-input
+                                name="colorThree"
+                                label="Color"
+                                message-when-value-missing="Color is required"
+                                message-when-pattern-mismatch="Color is invalid"
+                                onchange={handleOnChangeName_3}
+                                value={colorThreeValue}
+                                pattern="^[a-zA-Z\s ]*$"
+                            ></lightning-input>
+                            <lightning-input
+                                name="lpThree"
+                                label="License Plate Number"
+                                message-when-value-missing="License Plate Number is required"
+                                message-when-pattern-mismatch="License Plate Number is invalid"
+                                minlength="7" 
+                                message-when-too-short="License Plate Number is invalid"
+                                maxlength="7" 
+                                message-when-too-long="License Plate Number is invalid"
+                                onchange={handleOnChangeName_3}
+                                value={lpThreeValue}
+                                pattern="^[0-9a-zA-Z]*$"
+                            ></lightning-input>
+                        </div>
+                    </div>
+                </template>
+               </div>
+               <p style="
+                    width: 210px;
+                    height: 10px;
+                    padding: 0;
+                    margin: 0;
+                    vertical-align: top;
+                    position: relative;
+                    top: -1px;"
+                ></p>
+                <p style="height:4px; width:100%; border-width:0; color:rgb(128, 31, 31); background-color:rgb(128, 31, 31)"></p>
+            <lightning-layout>
+                <lightning-formatted-rich-text value={secThree}></lightning-formatted-rich-text>
+                <lightning-layout-item>
+                    <lightning-input 
+                        type="checkbox" 
+                        label="" 
+                        onchange={handleHandicapChange}
+                    ></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+            <template if:true={hasPermit}>
+                <lightning-layout>
+                    <lightning-layout-item>
+                        <div class="slds-grid">
+                            <div class="slds-col slds-p-horizontal_medium">
+                                <div class="slds-m-left_xx-large">
+                                    <lightning-input 
+                                    name="parkPermitNumber"
+                                    label="Handicap Parking Permit Registration #"
+                                    style="width:450px"
+                                    message-when-value-missing="Handicap Parking Permit Registration # is required"
+                                    message-when-pattern-mismatch="Handicap Parking Permit Registration # is invalid"
+                                    pattern="^[0-9a-zA-Z]*$"
+                                    value={parkPermitNumberValue}
+                                    onchange={handleOnChangeName}
+                                    ></lightning-input>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-p-horizontal_large">
+                                <lightning-input
+                                    name="placard"
+                                    label="Placard Number"
+                                    style="width:450px"
+                                    message-when-value-missing="Placard Number is required"
+                                    message-when-pattern-mismatch="Placard Number is invalid"
+                                    pattern="^[0-9a-zA-Z]*$"
+                                    value={placarValue}
+                                    onchange={handleOnChangeName}
+                                ></lightning-input>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+            <p style="height:4px; width:100%; border-width:0; color:rgb(128, 31, 31); background-color:rgb(128, 31, 31)"></p>
+            <lightning-button
+                class="slds-align_absolute-center"
+                label="Submit"
+                variant="success"
+                onclick={createVehicleRegistration}
+            ></lightning-button>
+        </lightning-record-edit-form>
+    </lightning-card>
+</template>

@@ -1,0 +1,40 @@
+.THIS label.slds-form-element_label{
+    display: none;
+}
+.osrleftagline {margin: 0 0 0 6px;}
+.reqAsterick{font-size: small; color: red;}
+.boldFont{
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    font-size: .75rem; 
+    padding-right: .5rem; 
+    padding-top: .25rem; 
+    margin-bottom: .125rem; 
+    font-family: "lato", sans-serif; 
+    display: inline-block;  
+}
+.redError{font-size: small; color: red;}
+.aligntobottom {margin-bottom: -22px;}
+.colorBox{color: white;
+    background-color: #0a32c6;
+    margin: 10px 0 10px 0}
+.slds-modal__container {
+    max-width:80rem !important;
+    width: 800px !important;
+    
+    overflow: visible;
+    overflow-y: visible;
+}
+
+.blog{
+    background-color: skyblue;
+    color: rgba(0,0,0,.6);
+    border: 32px solid yellow;
+    border-radius: 36px;
+    margin: 22px auto;
+    padding: 13px 30px
+px
+ 105px 30px;
+    height: 280px;
+    width: 50%;
+}
